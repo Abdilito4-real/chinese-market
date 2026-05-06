@@ -578,7 +578,11 @@
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
-      #hero { grid-template-columns: 1fr; padding-bottom: 60px; } /* Single column on mobile */
+      #hero { 
+        grid-template-columns: 1fr; 
+        padding-bottom: 60px;
+        background: linear-gradient(rgba(5, 5, 5, 0.8), rgba(5, 5, 5, 0.8)), url('./hero.png') center/cover no-repeat;
+      } /* Hero section now uses the image as a background on mobile with an overlay for readability */
       .hero-container { text-align: center; } /* Only text-align needed here now */
       .hero-inner { display: block; padding-top: 20px; }
       .hero-content { }
