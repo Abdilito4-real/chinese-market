@@ -691,11 +691,9 @@
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
-      .nav-actions {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-      }
+      
+      .nav-actions { display: none; }
+
       #hero { padding-bottom: 60px; }
       .hero-image-wrap::after {
         background: linear-gradient(
@@ -787,7 +785,7 @@
       <li><a href="#contact" data-en="Contact" data-zh="联系方式">Contact</a></li>
     </ul>
     <div class="nav-actions">
-      <div class="lang-switcher" id="langSwitcher" onclick="toggleLang()">
+      <div class="lang-switcher" onclick="toggleLang()">
         <div class="lang-option active">EN</div>
         <div class="lang-option">中</div>
         <div class="switcher-pill"></div>
@@ -801,6 +799,11 @@
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
+    <div class="lang-switcher" onclick="toggleLang()" style="margin-bottom: 10px;">
+      <div class="lang-option active">EN</div>
+      <div class="lang-option">中</div>
+      <div class="switcher-pill"></div>
+    </div>
     <a href="#projects" onclick="closeMenu()">Projects</a>
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
@@ -1377,11 +1380,17 @@
     }
 
     function toggleLang() {
-      const switcher = document.getElementById('langSwitcher');
       const isEn = document.documentElement.lang === 'en' || !document.documentElement.lang;
-      document.documentElement.lang = isEn ? 'zh' : 'en';
-      switcher.classList.toggle('zh-active');
-      switcher.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active'));
+      const newLang = isEn ? 'zh' : 'en';
+      document.documentElement.lang = newLang;
+      
+      document.querySelectorAll('.lang-switcher').forEach(switcher => {
+        switcher.classList.toggle('zh-active', newLang === 'zh');
+        switcher.querySelectorAll('.lang-option').forEach((opt, idx) => {
+          opt.classList.toggle('active', (newLang === 'en' && idx === 0) || (newLang === 'zh' && idx === 1));
+        });
+      });
+
       document.querySelectorAll('[data-en]').forEach(el => {
         el.innerHTML = isEn ? el.getAttribute('data-zh') : el.getAttribute('data-en');
       });
