@@ -90,6 +90,7 @@
     }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
     .nav-links a {
       font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
       color: var(--muted); transition: color .2s;
@@ -690,6 +691,11 @@
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
+      .nav-actions {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
       #hero { padding-bottom: 60px; }
       .hero-image-wrap::after {
         background: linear-gradient(
@@ -780,7 +786,7 @@
       <li><a href="#about" data-en="About" data-zh="关于我">About</a></li>
       <li><a href="#contact" data-en="Contact" data-zh="联系方式">Contact</a></li>
     </ul>
-    <div style="display:flex; align-items:center; gap:16px;">
+    <div class="nav-actions">
       <div class="lang-switcher" id="langSwitcher" onclick="toggleLang()">
         <div class="lang-option active">EN</div>
         <div class="lang-option">中</div>
@@ -1119,7 +1125,7 @@
             <span class="chip">Public Relations</span>
           </div>
           <div style="margin-top: 24px;">
-            <a href="https://linktr.ee/JunyuanAlpha" target="_blank" class="btn-primary" style="display: inline-block; padding: 10px 24px; font-size: 12px;" data-en="Connect with Me" data-zh="与我联系">Connect with Me</a>
+            <a href="https://linktr.ee/coconut.daddy" target="_blank" class="btn-primary" style="display: inline-block; padding: 10px 24px; font-size: 12px;" data-en="Connect with Me" data-zh="与我联系">Connect with Me</a>
           </div>
         </div>
 
@@ -1243,20 +1249,20 @@
         <div class="form-row">
           <div class="form-group">
             <label data-en="Name" data-zh="姓名">Name</label>
-            <input type="text" id="fname" placeholder="Satoshi Nakamoto" />
+            <input type="text" id="fname" name="name" placeholder="Satoshi Nakamoto" required />
           </div>
           <div class="form-group">
             <label data-en="Project / Company" data-zh="项目 / 公司">Project / Company</label>
-            <input type="text" id="fproject" placeholder="Your Protocol" />
+            <input type="text" id="fproject" name="project" placeholder="Your Protocol" />
           </div>
         </div>
         <div class="form-group">
           <label data-en="Email" data-zh="电子邮件">Email</label>
-          <input type="email" id="femail" placeholder="you@protocol.xyz" />
+          <input type="email" id="femail" name="email" placeholder="you@protocol.xyz" required />
         </div>
         <div class="form-group">
           <label data-en="Message" data-zh="信息内容">Message</label>
-          <textarea id="fmsg" placeholder="Tell me what you're building and how I can help..."></textarea>
+          <textarea id="fmsg" name="message" placeholder="Tell me what you're building and how I can help..." required></textarea>
         </div>
         <button class="form-submit" onclick="handleSubmit()" data-en="Send Message →" data-zh="发送消息 →">Send Message →</button>
         <div class="success-msg" id="successMsg" data-en="Message sent! I'll get back to you within 24 hours." data-zh="消息已发送！我会在 24 小时内回复您。">
@@ -1310,7 +1316,7 @@
       });
     });
 
-    function handleSubmit() {
+    async function handleSubmit() {
       const btn = document.querySelector('.form-submit');
       const success = document.getElementById('successMsg');
       const error = document.getElementById('errorMsg');
@@ -1331,17 +1337,43 @@
       btn.disabled = true;
       btn.innerHTML = isZh ? '发送中...' : 'Sending...';
 
-      setTimeout(() => {
+      // Replace 'YOUR_FORMSPREE_ID' with your actual Formspree ID
+      const FORMSPREE_ENDPOINT = "https://formspree.io/f/mzdoapvn";
+
+      try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            project: document.getElementById('fproject').value.trim(),
+            message: msg
+          })
+        });
+
+        if (response.ok) {
+          success.style.display = 'block';
+          document.getElementById('fname').value = '';
+          document.getElementById('fproject').value = '';
+          document.getElementById('femail').value = '';
+          document.getElementById('fmsg').value = '';
+          setTimeout(() => { success.style.display = 'none'; }, 5000);
+        } else {
+          const data = await response.json();
+          throw new Error(data.error || 'Submission failed');
+        }
+      } catch (err) {
+        error.textContent = isZh ? '发送失败，请稍后重试。' : 'Failed to send. Please try again later.';
+        error.style.display = 'block';
+      } finally {
         btn.disabled = false;
         const currentLang = document.documentElement.lang === 'zh' ? 'zh' : 'en';
         btn.innerHTML = btn.getAttribute('data-' + currentLang);
-        success.style.display = 'block';
-        document.getElementById('fname').value = '';
-        document.getElementById('fproject').value = '';
-        document.getElementById('femail').value = '';
-        document.getElementById('fmsg').value = '';
-        setTimeout(() => { success.style.display = 'none'; }, 5000);
-      }, 2000);
+      }
     }
 
     function toggleLang() {
