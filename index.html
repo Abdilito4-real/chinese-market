@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,18 +26,18 @@
 
   <style>
     :root {
-      color-scheme: dark;
-      --bg:        #;
-      --bg2:       #171b16;
-      --bg3:       #20251e;
-      --border:    rgba(238, 232, 216, 0.11);
-      --border-hi: rgba(201, 157, 67, 0.44);
-      --text:      #f0eee6;
-      --muted:     #a5a79d;
+      color-scheme: light;
+      --bg:        #f0eee7;
+      --bg2:       #fffefa;
+      --bg3:       #eeece4;
+      --border:    rgba(42, 49, 40, 0.13);
+      --border-hi: rgba(154, 112, 39, 0.38);
+      --text:      #292d26;
+      --muted:     #697066;
       --accent:    #c49a42;
-      --accent2:   #d4ad5c;
-      --glow-color: rgba(196, 154, 66, 0.18);
-      --card-bg:   linear-gradient(145deg, #1d221b 0%, #171b16 100%);
+      --accent2:   #8c6726;
+      --glow-color: rgba(169, 120, 34, 0.12);
+      --card-bg:   linear-gradient(145deg, #f8f6ef 0%, #eeece4 100%);
       --radius:    14px;
       --nav-h:     68px;
     }
@@ -92,6 +92,32 @@
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .theme-toggle {
+      display: inline-grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(42, 49, 40, 0.04);
+      color: var(--text);
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: rgba(196, 154, 66, 0.1);
+    }
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .theme-toggle-icon {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1;
+    }
     .nav-links a {
       font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
       color: var(--muted); transition: color .2s;
@@ -693,6 +719,12 @@
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-size: 16px; color: var(--muted); transition: color .2s; padding: 4px 0; }
     .mobile-menu a:hover { color: var(--accent); }
+    .mobile-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
 
     .reveal {
       opacity: 0; transform: translateY(24px);
@@ -1191,13 +1223,223 @@
       line-height: 1.7;
     }
     .partnership-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(8px, 1vw, 12px);
+      width: min(100%, 440px);
     }
+    .partnership-card .partnership-actions a {
+      display: flex;
+      min-width: 0;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(4px, 0.6vw, 8px);
+      padding: 10px clamp(4px, 1vw, 14px);
+      font-size: clamp(9px, 2.8vw, 12px);
+      white-space: nowrap;
+    }
+    .x-link-mark {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .partnership-actions .x-link-mark { font-size: clamp(13px, 1.2vw, 16px); }
+    .partnership-actions .btn-primary .x-link-mark { color: #17150f; }
+    html[data-theme="light"] .partnership-card {
+      background-image:
+        linear-gradient(90deg, rgba(10, 12, 18, 0.96) 0%, rgba(10, 12, 18, 0.88) 46%, rgba(10, 12, 18, 0.18) 100%),
+        url("./rally.jpeg");
+    }
+    html[data-theme="light"] .partnership-name { color: #f0eee6; }
+    html[data-theme="light"] .partnership-desc { color: #d0d2d8; }
+    html[data-theme="light"] .partnership-card .btn-ghost {
+      color: #f0eee6;
+      border-color: rgba(238, 232, 216, 0.22);
+      background: rgba(16, 19, 15, 0.68);
+    }
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(ellipse at 85% 8%, rgba(193, 157, 91, 0.1), transparent 28%),
+        var(--bg);
+    }
+    html[data-theme="light"] .grid-bg {
+      background-image:
+        linear-gradient(rgba(42, 49, 40, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42, 49, 40, 0.035) 1px, transparent 1px);
+    }
+    html[data-theme="light"] .hero-image-wrap::after {
+      background:
+        linear-gradient(90deg, rgba(16, 19, 15, 0.98) 0%, rgba(16, 19, 15, 0.91) 34%, rgba(16, 19, 15, 0.65) 55%, rgba(16, 19, 15, 0.08) 100%),
+        linear-gradient(0deg, rgba(16, 19, 15, 0.78), transparent 32%);
+    }
+    html[data-theme="light"] #hero {
+      --text: #f0eee6;
+      --muted: #c0c1b8;
+      --accent2: #e1c47f;
+    }
+    html[data-theme="light"] #hero::after { display: none; }
+    html[data-theme="light"] #hero .hero-badge {
+      background: rgba(196, 154, 66, 0.12);
+      border-color: rgba(196, 154, 66, 0.36);
+      color: #e1c47f;
+    }
+    html[data-theme="light"] #hero .hero-sub { color: #d0d2d8; }
+    html[data-theme="light"] #hero .hero-stats { border-top-color: rgba(238, 232, 216, 0.2); }
+    html[data-theme="light"] #hero .btn-ghost {
+      color: #f0eee6;
+      border-color: rgba(238, 232, 216, 0.3);
+      background: rgba(16, 19, 15, 0.55);
+    }
+    html[data-theme="light"] #hero .btn-ghost:hover { color: #e1c47f; }
+    html[data-theme="light"] .btn-ghost {
+      color: var(--text);
+      border-color: rgba(42, 49, 40, 0.2);
+      background: rgba(255, 253, 248, 0.66);
+    }
+    html[data-theme="light"] .theme-toggle { color: #292d26; }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #10130f;
+      --bg2: #1d221b;
+      --bg3: #171b16;
+      --border: rgba(238, 232, 216, 0.11);
+      --border-hi: rgba(201, 157, 67, 0.44);
+      --text: #f0eee6;
+      --muted: #a5a79d;
+      --accent: #c49a42;
+      --accent2: #d4ad5c;
+      --glow-color: rgba(196, 154, 66, 0.18);
+      --card-bg: linear-gradient(145deg, #1d221b 0%, #171b16 100%);
+    }
+    html[data-theme="dark"] body {
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 85% 8%, rgba(193, 157, 91, 0.07), transparent 28%),
+        var(--bg);
+    }
+    html[data-theme="dark"] body::before { opacity: 0.12; }
+    html[data-theme="dark"] .grid-bg {
+      background-image:
+        linear-gradient(rgba(238, 232, 216, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(238, 232, 216, 0.035) 1px, transparent 1px);
+    }
+    html[data-theme="dark"] nav {
+      color: var(--text);
+      background: rgba(16, 19, 15, 0.92);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+    html[data-theme="dark"] .nav-logo { color: var(--text); }
+    html[data-theme="dark"] .nav-links a { color: var(--muted); }
+    html[data-theme="dark"] .lang-switcher {
+      background: rgba(238, 232, 216, 0.04);
+      border-color: var(--border);
+    }
+    html[data-theme="dark"] .lang-switcher:hover {
+      border-color: rgba(238, 232, 216, 0.2);
+      background: rgba(238, 232, 216, 0.07);
+    }
+    html[data-theme="dark"] .lang-option.active { color: #17150f; }
+    html[data-theme="dark"] .switcher-pill { background: var(--accent); }
+    html[data-theme="dark"] .hamburger span { background: var(--text); }
+    html[data-theme="dark"] #hero {
+      color: var(--text);
+      background: var(--bg);
+    }
+    html[data-theme="dark"] .hero-image-wrap::after {
+      background:
+        linear-gradient(90deg, rgba(16, 19, 15, 0.98) 0%, rgba(16, 19, 15, 0.91) 34%, rgba(16, 19, 15, 0.65) 55%, rgba(16, 19, 15, 0.08) 100%),
+        linear-gradient(0deg, rgba(16, 19, 15, 0.78), transparent 32%);
+    }
+    html[data-theme="dark"] #hero::after { background: linear-gradient(to top, var(--bg) 0%, transparent 100%); }
+    html[data-theme="dark"] .hero-sub { color: #c0c1b8; }
+    html[data-theme="dark"] .btn-ghost {
+      color: var(--text);
+      border-color: rgba(238, 232, 216, 0.22);
+      background: rgba(29, 34, 27, 0.68);
+    }
+    html[data-theme="dark"] #projects,
+    html[data-theme="dark"] #about,
+    html[data-theme="dark"] #contact,
+    html[data-theme="dark"] .ceo-statement,
+    html[data-theme="dark"] footer {
+      --text: #f0eee6;
+      --muted: #a5a79d;
+      --accent2: #d4ad5c;
+      --border: rgba(238, 232, 216, 0.11);
+      --border-hi: rgba(201, 157, 67, 0.44);
+      color: var(--text);
+    }
+    html[data-theme="dark"] #projects,
+    html[data-theme="dark"] #contact { background: #141813; }
+    html[data-theme="dark"] #about,
+    html[data-theme="dark"] footer { background: #10130f; }
+    html[data-theme="dark"] .section-label { color: #d4ad5c; }
+    html[data-theme="dark"] .project-card,
+    html[data-theme="dark"] .about-card,
+    html[data-theme="dark"] #contact .contact-card,
+    html[data-theme="dark"] #contact .contact-form-wrap {
+      color: var(--text);
+      background: linear-gradient(145deg, #1d221b 0%, #171b16 100%);
+      border-color: rgba(238, 232, 216, 0.1);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+    }
+    html[data-theme="dark"] .project-tag,
+    html[data-theme="dark"] .view-stats-btn,
+    html[data-theme="dark"] .chip { background: rgba(238, 232, 216, 0.045); }
+    html[data-theme="dark"] .timeline-item { border-bottom-color: rgba(238, 232, 216, 0.11); }
+    html[data-theme="dark"] .timeline-year,
+    html[data-theme="dark"] .about-role { color: #d4ad5c; }
+    html[data-theme="dark"] .ceo-statement {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(186, 145, 63, 0.1), transparent 60%),
+        #191d17;
+      border-color: rgba(196, 154, 66, 0.25);
+    }
+    html[data-theme="dark"] .form-group input,
+    html[data-theme="dark"] .form-group textarea {
+      color: var(--text);
+      background: #11140f;
+      border-color: rgba(238, 232, 216, 0.14);
+    }
+    html[data-theme="dark"] .form-group input::placeholder,
+    html[data-theme="dark"] .form-group textarea::placeholder { color: #85887f; }
+    html[data-theme="dark"] .mobile-menu {
+      color: var(--text);
+      background: rgba(16, 19, 15, 0.98);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+    }
+    html[data-theme="dark"] .mobile-menu a { color: var(--muted); }
+    html[data-theme="dark"] .theme-toggle {
+      color: var(--text);
+      background: rgba(238, 232, 216, 0.04);
+      border-color: var(--border);
+    }
+    html[data-theme="dark"] .partnership-card {
+      background-image:
+        linear-gradient(90deg, rgba(10, 12, 18, 0.96) 0%, rgba(10, 12, 18, 0.88) 46%, rgba(10, 12, 18, 0.18) 100%),
+        url("./rally.jpeg");
+    }
+    html[data-theme="dark"] .partnership-desc { color: #d0d2d8; }
     @media (max-width: 620px) {
       .partnership-card {
         min-height: 0;
+        padding: 18px;
+        background-image:
+          linear-gradient(90deg, rgba(10, 12, 18, 0.94), rgba(10, 12, 18, 0.76)),
+          url("./rally.jpeg");
+      }
+    }
+    @media (max-width: 768px) {
+      html[data-theme="light"] .hero-image-wrap::after {
+        background:
+          linear-gradient(90deg, rgba(16, 19, 15, 0.96), rgba(16, 19, 15, 0.78)),
+          linear-gradient(0deg, rgba(16, 19, 15, 0.78), transparent 65%);
+      }
+    }
+    @media (max-width: 620px) {
+      html[data-theme="light"] .partnership-card {
         background-image:
           linear-gradient(90deg, rgba(10, 12, 18, 0.94), rgba(10, 12, 18, 0.76)),
           url("./rally.jpeg");
@@ -1278,6 +1520,9 @@
         <div class="lang-option">中</div>
         <div class="switcher-pill"></div>
       </div>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+      </button>
       <a href="#contact" class="nav-cta" data-en="Get In Touch" data-zh="即刻联系">Get In Touch</a>
     </div>
     <div class="hamburger" id="hamburger" aria-label="Menu">
@@ -1287,10 +1532,15 @@
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
-    <div class="lang-switcher" onclick="toggleLang()" style="margin-bottom: 10px;">
-      <div class="lang-option active">EN</div>
-      <div class="lang-option">中</div>
-      <div class="switcher-pill"></div>
+    <div class="mobile-controls">
+      <div class="lang-switcher" onclick="toggleLang()">
+        <div class="lang-option active">EN</div>
+        <div class="lang-option">中</div>
+        <div class="switcher-pill"></div>
+      </div>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+      </button>
     </div>
     <a href="#projects" onclick="closeMenu()">Projects</a>
     <a href="#partnership" onclick="closeMenu()" data-en="Partnerships" data-zh="合作伙伴">Partnerships</a>
@@ -1723,21 +1973,21 @@
   <!-- PARTNERSHIP -->
   <section id="partnership">
     <div class="section-label" data-en="Partnership" data-zh="合作伙伴">Partnership</div>
-    <h2 class="section-title" data-en="Officially Partnering with Rally" data-zh="正式与 Rally 达成合作">Officially Partnering with Rally</h2>
+    <h2 class="section-title" data-en="Officially partnering with RallyPad.Fun" data-zh="正式与 RallyPad.Fun 达成合作">Officially partnering with RallyPad.Fun</h2>
     <div class="partnership-card reveal">
       <div class="partnership-content">
         <div class="partnership-badge" data-en="Official Partnership" data-zh="官方合作">Official Partnership</div>
-        <div class="partnership-name">Rally</div>
+        <div class="partnership-name">RallyPad.Fun</div>
         <p class="partnership-desc"
-           data-en="Rally is building a new home for launches, traders, and the attention that drives markets. We’re excited to partner with this launchpad as it builds a programmable market layer for any asset."
-           data-zh="Rally 正在为项目发行者、交易者以及推动市场发展的关注度打造一个全新的家园。我们很高兴与 Rally 合作，共同支持这个为任何资产构建可编程市场层的发行平台。">
-          Rally is building a new home for launches, traders, and the attention that drives markets. We’re excited to partner with this launchpad as it builds a programmable market layer for any asset.
+           data-en="RallyPad.Fun is building a new home for launches, traders, and the attention that drives markets. We’re excited to partner with this launchpad as it builds a programmable market layer for any asset."
+           data-zh="RallyPad.Fun 正在为项目发行者、交易者以及推动市场发展的关注度打造一个全新的家园。我们很高兴与这个发行平台合作，共同支持其为任何资产构建可编程市场层。">
+          RallyPad.Fun is building a new home for launches, traders, and the attention that drives markets. We’re excited to partner with this launchpad as it builds a programmable market layer for any asset.
         </p>
         <div class="partnership-actions">
           <a href="https://x.com/rallypadfun" target="_blank" rel="noopener noreferrer" class="btn-primary"
-             data-en="Explore Rally" data-zh="了解 Rally">Explore Rally</a>
+             data-en="<span class='x-link-mark' aria-hidden='true'>𝕏</span>RallyPad.Fun" data-zh="<span class='x-link-mark' aria-hidden='true'>𝕏</span>RallyPad.Fun"><span class="x-link-mark" aria-hidden="true">𝕏</span>RallyPad.Fun</a>
           <a href="https://x.com/coconutdaddyjun/status/2095505688852414502" target="_blank" rel="noopener noreferrer" class="btn-ghost"
-             data-en="Read the announcement" data-zh="查看合作公告">Read the announcement</a>
+             data-en="<span class='x-link-mark' aria-hidden='true'>𝕏</span>Announcement" data-zh="<span class='x-link-mark' aria-hidden='true'>𝕏</span>公告"><span class="x-link-mark" aria-hidden="true">𝕏</span>Announcement</a>
         </div>
       </div>
     </div>
@@ -1928,11 +2178,40 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Ed<span>en</span></div>
+    <div class="footer-logo">⛩️ <span>EDEN</span> 阿尔法 策略 🐂</div>
     <div class="footer-copy" data-en="© 2026 · All rights reserved" data-zh="© 2026 · 版权所有">© 2026 · All rights reserved</div>
   </footer>
 
   <script>
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+    function updateThemeToggleButtons() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const isZh = document.documentElement.lang === 'zh';
+      const label = isDark
+        ? (isZh ? '切换到浅色主题' : 'Switch to bright theme')
+        : (isZh ? '切换到深色主题' : 'Switch to dark theme');
+      themeToggleButtons.forEach(button => {
+        button.setAttribute('aria-pressed', String(isDark));
+        button.setAttribute('aria-label', label);
+        button.setAttribute('title', label);
+        button.querySelector('.theme-toggle-icon').textContent = isDark ? '☀' : '☾';
+      });
+    }
+
+    const savedTheme = localStorage.getItem('eden-theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      document.documentElement.dataset.theme = savedTheme;
+    }
+    updateThemeToggleButtons();
+    themeToggleButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        document.documentElement.dataset.theme =
+          document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('eden-theme', document.documentElement.dataset.theme);
+        updateThemeToggleButtons();
+      });
+    });
+
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -2064,6 +2343,7 @@
       document.querySelectorAll('[data-en]').forEach(el => {
         el.innerHTML = isEn ? el.getAttribute('data-zh') : el.getAttribute('data-en');
       });
+      updateThemeToggleButtons();
       updateProjectsToggleLabel();
     }
   </script>
