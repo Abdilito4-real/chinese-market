@@ -26,17 +26,18 @@
 
   <style>
     :root {
-      --bg:        #050505;
-      --bg2:       #050505;
-      --bg3:       #0f0f0f;
-      --border:    rgba(255,255,255,0.05);
-      --border-hi: rgba(245, 199, 93, 0.35);
-      --text:      #FFFFFF;
-      --muted:     #A1A1A1;
-      --accent:    #F5C75D;
-      --accent2:   #B8860B;
-      --glow-color: rgba(255, 159, 0, 0.25);
-      --card-bg:   radial-gradient(circle, #0f0f0f 0%, #050505 100%);
+      color-scheme: dark;
+      --bg:        #;
+      --bg2:       #171b16;
+      --bg3:       #20251e;
+      --border:    rgba(238, 232, 216, 0.11);
+      --border-hi: rgba(201, 157, 67, 0.44);
+      --text:      #f0eee6;
+      --muted:     #a5a79d;
+      --accent:    #c49a42;
+      --accent2:   #d4ad5c;
+      --glow-color: rgba(196, 154, 66, 0.18);
+      --card-bg:   linear-gradient(145deg, #1d221b 0%, #171b16 100%);
       --radius:    14px;
       --nav-h:     68px;
     }
@@ -330,6 +331,17 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 20px;
+    }
+    .projects-grid > .project-card[hidden] { display: none !important; }
+    .projects-toggle {
+      display: flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 32px auto 0;
+      border: 0;
+      cursor: pointer;
     }
 
     .project-card {
@@ -717,6 +729,480 @@
       .hero-actions { flex-direction: column; }
       .btn-primary, .btn-ghost { text-align: center; }
     }
+
+    /* Light, editorial surfaces with Eden's gold and Chinese-market cues. */
+    body {
+      background:
+        radial-gradient(ellipse at 85% 8%, rgba(193, 157, 91, 0.1), transparent 28%),
+        var(--bg);
+    }
+    body::before { opacity: 0.16; }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(42, 49, 40, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42, 49, 40, 0.035) 1px, transparent 1px);
+    }
+    nav {
+      background: rgba(250, 248, 242, 0.9);
+      box-shadow: 0 8px 30px rgba(44, 42, 34, 0.04);
+    }
+    .nav-cta { color: #fffdf8; }
+    .lang-switcher { background: rgba(42, 49, 40, 0.04); }
+    .lang-switcher:hover {
+      border-color: rgba(42, 49, 40, 0.2);
+      background: rgba(42, 49, 40, 0.07);
+    }
+    .lang-option.active { color: #fffdf8; }
+    .switcher-pill { background: var(--text); }
+    .hamburger span { background: var(--text); }
+
+    #hero {
+      min-height: min(900px, 100svh);
+      padding-top: calc(var(--nav-h) + 44px);
+      padding-bottom: 76px;
+    }
+    .hero-image-wrap::after {
+      background:
+        linear-gradient(90deg, rgba(247, 245, 239, 0.99) 0%, rgba(247, 245, 239, 0.96) 34%, rgba(247, 245, 239, 0.72) 55%, rgba(247, 245, 239, 0.12) 100%),
+        linear-gradient(0deg, rgba(247, 245, 239, 0.7), transparent 32%);
+    }
+    #hero::after {
+      height: 150px;
+      background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+    }
+    .hero-container { max-width: 860px; }
+    .hero-badge {
+      background: rgba(169, 120, 34, 0.08);
+      border-color: rgba(169, 120, 34, 0.25);
+      color: var(--accent2);
+    }
+    .hero-badge::before { box-shadow: 0 0 8px rgba(169, 120, 34, 0.45); }
+    h1 {
+      font-size: clamp(42px, 5.3vw, 76px);
+      letter-spacing: -2px;
+    }
+    .hero-sub { color: #555f56; }
+    .btn-primary, .form-submit {
+      background: linear-gradient(135deg, #bd913f, #987022);
+      color: #fffdf8;
+      box-shadow: 0 8px 24px rgba(148, 105, 31, 0.18);
+    }
+    .btn-primary:hover { box-shadow: 0 12px 28px rgba(148, 105, 31, 0.24); }
+    .btn-ghost {
+      color: var(--text);
+      border-color: rgba(42, 49, 40, 0.2);
+      background: rgba(255, 253, 248, 0.66);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+    .hero-stats {
+      border-top-color: rgba(42, 49, 40, 0.16);
+      gap: clamp(22px, 4vw, 48px);
+    }
+    .stat-num { color: var(--text); }
+    section { scroll-margin-top: calc(var(--nav-h) + 16px); }
+    .section-label { color: var(--accent2); }
+    .section-label::before { background: var(--accent); }
+
+    #projects { background: rgba(255, 253, 248, 0.78); }
+    .project-card {
+      border-color: rgba(42, 49, 40, 0.12);
+      box-shadow: 0 8px 28px rgba(51, 47, 36, 0.045);
+    }
+    .project-card:hover {
+      box-shadow: 0 18px 42px rgba(74, 57, 24, 0.11);
+    }
+    .project-card::before {
+      background: linear-gradient(135deg, rgba(169, 120, 34, 0.07) 0%, transparent 62%);
+    }
+    .project-icon {
+      background: rgba(169, 120, 34, 0.1);
+      border-color: rgba(169, 120, 34, 0.2);
+    }
+    .project-tag { background: rgba(42, 49, 40, 0.035); }
+    .project-tag.live { color: #187548; }
+    .project-tag.x8, .call-multiplier.blue { color: #14729b; }
+    .call-multiplier { text-shadow: none; }
+    .call-multiplier.blue, .call-multiplier.gold { text-shadow: none; }
+    .call-flow .to, .trending-link, .trending-link::before { color: #187548; }
+    .trending-link::before { background: #187548; }
+    .card-video-wrap { background: #eee9dc; }
+    .card-video-placeholder {
+      background: radial-gradient(circle at center, rgba(169, 120, 34, 0.08) 0%, #f5f1e8 100%);
+    }
+    .view-stats-btn { background: rgba(42, 49, 40, 0.035); }
+    .project-card:hover .view-stats-btn {
+      border-color: rgba(42, 49, 40, 0.2);
+      color: var(--text);
+    }
+
+    #about { background: var(--bg); }
+    .about-card {
+      background: linear-gradient(145deg, #fffefa 0%, #f1ede3 100%);
+      box-shadow: 0 16px 48px rgba(51, 47, 36, 0.07);
+    }
+    .avatar-ring { color: #fffdf8; }
+    .chip { background: rgba(42, 49, 40, 0.04); }
+    .timeline-item { border-bottom-color: rgba(42, 49, 40, 0.11); }
+    .timeline-year, .about-role { color: var(--accent2); }
+
+    .ceo-statement {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(186, 145, 63, 0.13), transparent 60%),
+        #efede5;
+      border-color: rgba(169, 120, 34, 0.25);
+    }
+    .ceo-statement::before { opacity: 0.12; }
+
+    #contact { background: rgba(255, 253, 248, 0.78); }
+    .contact-card, .contact-form-wrap {
+      background: linear-gradient(145deg, #fffefa 0%, #f6f2e9 100%);
+      box-shadow: 0 8px 28px rgba(51, 47, 36, 0.045);
+    }
+    .contact-card:hover { background: #fffefa; }
+    .contact-icon[style*="255,255,255"] { background: #202820 !important; }
+    .contact-form-wrap { box-shadow: 0 16px 48px rgba(51, 47, 36, 0.07); }
+    .form-group input, .form-group textarea {
+      background: #fffefa;
+      border-color: rgba(42, 49, 40, 0.16);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #96988f; }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(169, 120, 34, 0.1);
+    }
+    .success-msg {
+      background: rgba(169, 120, 34, 0.08);
+      border-color: rgba(169, 120, 34, 0.24);
+      color: var(--accent2);
+    }
+    footer { background: var(--bg); }
+    .mobile-menu {
+      background: rgba(250, 248, 242, 0.98);
+      box-shadow: 0 16px 32px rgba(44, 42, 34, 0.08);
+    }
+
+    @media (max-width: 768px) {
+      .hero-image-wrap::after {
+        background:
+          linear-gradient(90deg, rgba(247, 245, 239, 0.97), rgba(247, 245, 239, 0.8)),
+          linear-gradient(0deg, rgba(247, 245, 239, 0.7), transparent 65%);
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 14px;
+        text-align: left;
+      }
+      .stat-num { font-size: 30px; }
+    }
+    @media (max-width: 480px) {
+      #hero { min-height: auto; }
+      .hero-stats { margin-top: 44px; padding-top: 28px; }
+      .about-card, .contact-form-wrap { padding: 26px; }
+    }
+
+    /* Dark editorial surfaces with Eden's gold and Chinese-market cues. */
+    body {
+      background:
+        radial-gradient(ellipse at 85% 8%, rgba(193, 157, 91, 0.07), transparent 28%),
+        var(--bg);
+    }
+    body::before { opacity: 0.12; }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(238, 232, 216, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(238, 232, 216, 0.035) 1px, transparent 1px);
+    }
+    nav {
+      background: rgba(16, 19, 15, 0.9);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    }
+    .nav-cta { color: #17150f; }
+    .lang-switcher { background: rgba(238, 232, 216, 0.04); }
+    .lang-switcher:hover {
+      border-color: rgba(238, 232, 216, 0.2);
+      background: rgba(238, 232, 216, 0.07);
+    }
+    .lang-option.active { color: #17150f; }
+    .switcher-pill { background: var(--accent); }
+    .hamburger span { background: var(--text); }
+
+    .hero-image-wrap::after {
+      background:
+        linear-gradient(90deg, rgba(16, 19, 15, 0.98) 0%, rgba(16, 19, 15, 0.91) 34%, rgba(16, 19, 15, 0.65) 55%, rgba(16, 19, 15, 0.08) 100%),
+        linear-gradient(0deg, rgba(16, 19, 15, 0.78), transparent 32%);
+    }
+    #hero::after { background: linear-gradient(to top, var(--bg) 0%, transparent 100%); }
+    .hero-badge {
+      background: rgba(196, 154, 66, 0.1);
+      border-color: rgba(196, 154, 66, 0.28);
+      color: #e1c47f;
+    }
+    .hero-badge::before { box-shadow: 0 0 8px rgba(196, 154, 66, 0.5); }
+    .hero-sub { color: #c0c1b8; }
+    .btn-primary, .form-submit {
+      background: linear-gradient(135deg, #d2ad5b, #b68a35);
+      color: #17150f;
+      box-shadow: 0 8px 24px rgba(148, 105, 31, 0.2);
+    }
+    .btn-primary:hover { box-shadow: 0 12px 28px rgba(148, 105, 31, 0.3); }
+    .btn-ghost {
+      color: var(--text);
+      border-color: rgba(238, 232, 216, 0.22);
+      background: rgba(29, 34, 27, 0.68);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: #e1c47f; }
+    .hero-stats { border-top-color: rgba(238, 232, 216, 0.16); }
+    .section-label { color: #d4ad5c; }
+
+    #projects, #contact { background: #141813; }
+    .project-card {
+      border-color: rgba(238, 232, 216, 0.1);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    }
+    .project-card:hover {
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), 0 0 28px rgba(196, 154, 66, 0.08);
+    }
+    .project-card::before {
+      background: linear-gradient(135deg, rgba(196, 154, 66, 0.1) 0%, transparent 62%);
+    }
+    .project-icon {
+      background: rgba(196, 154, 66, 0.1);
+      border-color: rgba(196, 154, 66, 0.2);
+    }
+    .project-tag { background: rgba(238, 232, 216, 0.045); }
+    .project-tag.live { color: #60ce91; }
+    .project-tag.x8, .call-multiplier.blue { color: #63b9e0; }
+    .call-multiplier, .call-multiplier.blue, .call-multiplier.gold { text-shadow: none; }
+    .call-flow .to, .trending-link, .trending-link::before { color: #60ce91; }
+    .trending-link::before { background: #60ce91; }
+    .card-video-wrap { background: #0d100c; }
+    .card-video-placeholder {
+      background: radial-gradient(circle at center, rgba(196, 154, 66, 0.08) 0%, #171b16 100%);
+    }
+    .view-stats-btn { background: rgba(238, 232, 216, 0.035); }
+    .project-card:hover .view-stats-btn { border-color: rgba(238, 232, 216, 0.2); }
+
+    .about-card {
+      background: linear-gradient(145deg, #1d221b 0%, #171b16 100%);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+    }
+    .avatar-ring { color: #17150f; }
+    .chip { background: rgba(238, 232, 216, 0.045); }
+    .timeline-item { border-bottom-color: rgba(238, 232, 216, 0.11); }
+    .timeline-year, .about-role { color: #d4ad5c; }
+
+    .ceo-statement {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(186, 145, 63, 0.1), transparent 60%),
+        #191d17;
+      border-color: rgba(196, 154, 66, 0.25);
+    }
+    #contact .contact-card, #contact .contact-form-wrap {
+      background: linear-gradient(145deg, #1d221b 0%, #171b16 100%);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    }
+    .contact-card:hover { background: #22271f !important; }
+    .contact-icon[style*="255,255,255"] { background: rgba(238, 232, 216, 0.1) !important; }
+    .contact-form-wrap { box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22) !important; }
+    .form-group input, .form-group textarea {
+      background: #11140f;
+      border-color: rgba(238, 232, 216, 0.14);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #85887f; }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(196, 154, 66, 0.14);
+    }
+    .success-msg {
+      background: rgba(196, 154, 66, 0.1);
+      border-color: rgba(196, 154, 66, 0.25);
+      color: #e1c47f;
+    }
+    footer { background: var(--bg); }
+    .mobile-menu {
+      background: rgba(16, 19, 15, 0.98);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 768px) {
+      .hero-image-wrap::after {
+        background:
+          linear-gradient(90deg, rgba(16, 19, 15, 0.96), rgba(16, 19, 15, 0.78)),
+          linear-gradient(0deg, rgba(16, 19, 15, 0.78), transparent 65%);
+      }
+    }
+
+    nav {
+      --muted: #697066;
+      color: #292d26;
+      background: rgba(238, 236, 228, 0.94);
+      border-bottom-color: rgba(42, 49, 40, 0.13);
+      box-shadow: 0 8px 30px rgba(44, 42, 34, 0.08);
+    }
+    .nav-logo { color: #292d26; }
+    .nav-links a { color: #697066; }
+    .lang-switcher {
+      background: rgba(42, 49, 40, 0.04);
+      border-color: rgba(42, 49, 40, 0.14);
+    }
+    .lang-switcher:hover {
+      border-color: rgba(42, 49, 40, 0.24);
+      background: rgba(42, 49, 40, 0.07);
+    }
+    .hamburger span { background: #292d26; }
+
+    #projects, #about, #contact, .ceo-statement, footer {
+      --text: #292d26;
+      --muted: #697066;
+      --accent2: #9a7027;
+      --border: rgba(42, 49, 40, 0.13);
+      --border-hi: rgba(154, 112, 39, 0.38);
+      color: var(--text);
+    }
+    #projects, #contact { background: #e9e7df; }
+    #about, footer { background: #f0eee7; }
+
+    .section-label { color: #8c6726; }
+    .project-card {
+      background: linear-gradient(145deg, #f7f5ee 0%, #eeece4 100%);
+      border-color: rgba(42, 49, 40, 0.13);
+      box-shadow: 0 8px 28px rgba(51, 47, 36, 0.06);
+    }
+    .project-card:hover {
+      box-shadow: 0 18px 42px rgba(74, 57, 24, 0.12);
+    }
+    .project-card::before {
+      background: linear-gradient(135deg, rgba(169, 120, 34, 0.07) 0%, transparent 62%);
+    }
+    .project-icon {
+      background: rgba(169, 120, 34, 0.1);
+      border-color: rgba(169, 120, 34, 0.2);
+    }
+    .project-tag, .view-stats-btn { background: rgba(42, 49, 40, 0.045); }
+    .project-tag.live, .call-flow .to, .trending-link, .trending-link::before {
+      color: #187548;
+    }
+    .project-tag.x8, .call-multiplier.blue { color: #14729b; }
+    .trending-link::before { background: #187548; }
+    .card-video-wrap { background: #e4e0d5; }
+    .card-video-placeholder {
+      background: radial-gradient(circle at center, rgba(169, 120, 34, 0.08) 0%, #eeece4 100%);
+    }
+    .project-card:hover .view-stats-btn {
+      border-color: rgba(42, 49, 40, 0.2);
+      color: #292d26;
+    }
+    .about-card, #contact .contact-card, #contact .contact-form-wrap {
+      background: linear-gradient(145deg, #f8f6ef 0%, #eeece4 100%);
+      box-shadow: 0 12px 36px rgba(51, 47, 36, 0.07);
+    }
+    .chip { background: rgba(42, 49, 40, 0.045); }
+    .timeline-item { border-bottom-color: rgba(42, 49, 40, 0.13); }
+    .timeline-year, .about-role { color: #8c6726; }
+    .ceo-statement {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(186, 145, 63, 0.12), transparent 60%),
+        #e7e5dc;
+      border-color: rgba(169, 120, 34, 0.24);
+    }
+    .contact-card:hover { background: #f8f6ef !important; }
+    .contact-icon[style*="255,255,255"] { background: rgba(42, 49, 40, 0.08) !important; }
+    .form-group input, .form-group textarea {
+      color: #292d26;
+      background: #f8f6ef;
+      border-color: rgba(42, 49, 40, 0.16);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #7b8076; }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #a97822;
+      box-shadow: 0 0 0 3px rgba(169, 120, 34, 0.1);
+    }
+    .success-msg {
+      background: rgba(169, 120, 34, 0.08);
+      border-color: rgba(169, 120, 34, 0.24);
+      color: #8c6726;
+    }
+    .mobile-menu {
+      color: #292d26;
+      background: rgba(240, 238, 231, 0.98);
+      box-shadow: 0 16px 32px rgba(44, 42, 34, 0.1);
+    }
+    .mobile-menu a { color: #697066; }
+    .mobile-menu .lang-switcher {
+      background: rgba(42, 49, 40, 0.04);
+      border-color: rgba(42, 49, 40, 0.14);
+    }
+    .mobile-menu .lang-option { color: #697066; }
+
+    #partnership {
+      background: var(--bg);
+    }
+    .partnership-card {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      max-width: 780px;
+      min-height: 300px;
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: #10131a;
+      background-image:
+        linear-gradient(90deg, rgba(10, 12, 18, 0.96) 0%, rgba(10, 12, 18, 0.88) 46%, rgba(10, 12, 18, 0.18) 100%),
+        url("./rally.jpeg");
+      background-position: center;
+      background-size: cover;
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.16);
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+    }
+    .partnership-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(196, 154, 66, 0.32);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
+    }
+    .partnership-content {
+      position: relative;
+      z-index: 1;
+      max-width: 470px;
+    }
+    .partnership-badge {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border: 1px solid rgba(196, 154, 66, 0.28);
+      border-radius: 999px;
+      background: rgba(196, 154, 66, 0.1);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .partnership-name {
+      margin-bottom: 8px;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 800;
+    }
+    .partnership-desc {
+      margin-bottom: 20px;
+      color: #d0d2d8;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .partnership-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    @media (max-width: 620px) {
+      .partnership-card {
+        min-height: 0;
+        background-image:
+          linear-gradient(90deg, rgba(10, 12, 18, 0.94), rgba(10, 12, 18, 0.76)),
+          url("./rally.jpeg");
+      }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -782,6 +1268,7 @@
     <div class="nav-logo">⛩️ <span>EDEN</span> 阿尔法 策略 🐂</div>
     <ul class="nav-links">
       <li><a href="#projects" data-en="Projects" data-zh="精选项目">Projects</a></li>
+      <li><a href="#partnership" data-en="Partnerships" data-zh="合作伙伴">Partnerships</a></li>
       <li><a href="#about" data-en="About" data-zh="关于我">About</a></li>
       <li><a href="#contact" data-en="Contact" data-zh="联系方式">Contact</a></li>
     </ul>
@@ -806,6 +1293,7 @@
       <div class="switcher-pill"></div>
     </div>
     <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#partnership" onclick="closeMenu()" data-en="Partnerships" data-zh="合作伙伴">Partnerships</a>
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
@@ -814,7 +1302,7 @@
   <section id="hero">
     <!-- Full-bleed background image with gradient overlay -->
     <div class="hero-image-wrap">
-      <img src="./hero.png" alt="Eden Alpha Marketing Web3 crypto growth agency hero image" class="hero-main-img" />
+      <img src="./Golden Dragon Guarding the World.png" alt="Eden Alpha Marketing Web3 crypto growth agency hero image" class="hero-main-img" />
     </div>
 
     <div class="orb orb-1"></div>
@@ -866,7 +1354,7 @@
       Verified crypto growth campaigns and strategic market calls tracked across the Web3 ecosystem. Eden Alpha Marketing focuses on high-conviction crypto exposure, community-driven momentum, and strategic growth positioning.
     </p>
 
-    <div class="projects-grid">
+    <div class="projects-grid" id="projectsGrid">
 
       <!-- Call 1: Giggle Fund x20 -->
       <div class="project-card reveal">
@@ -1037,7 +1525,7 @@
       </div>
 
       <!-- Call 4: Palu x20 -->
-      <div class="project-card reveal">
+      <div class="project-card reveal additional-project" hidden>
         <div class="card-video-wrap">
           <video src="./achievement-x20.MP4" autoplay loop muted playsinline
                  onerror="this.parentElement.innerHTML='<div class=\'card-video-placeholder\'><div class=\'play-icon\'>▶</div><span>x20 Achievement</span></div>'">
@@ -1093,7 +1581,7 @@
       </div>
 
       <!-- Card 1: SpaceX Simple -->
-      <div class="project-card reveal">
+      <div class="project-card reveal additional-project" hidden>
         <div class="card-video-wrap">
           <video src="./achievement-x30.MP4" autoplay loop muted playsinline
                  onerror="this.parentElement.innerHTML='<div class=\'card-video-placeholder\'><div class=\'play-icon\'>▶</div><span>x30 Achievement</span></div>'">
@@ -1145,7 +1633,7 @@
       </div>
 
       <!-- Card 2: SpaceX Detailed Profit -->
-      <div class="project-card reveal">
+      <div class="project-card reveal additional-project" hidden>
         <div class="card-video-wrap">
           <img src="./photo_5825410039768878978_w.jpg" autoplay loop muted playsinline
                  onerror="this.parentElement.innerHTML='<div class=\'card-video-placeholder\'><div class=\'play-icon\'>▶</div><span>x30 Achievement</span></div>'">
@@ -1214,7 +1702,7 @@
       </div>
 
       <!-- More Coming Soon -->
-      <a href="https://t.me/edenalphaplays" target="_blank" rel="noopener" class="project-card reveal" style="border-style:dashed;display:flex;align-items:center;justify-content:center;min-height:200px;">
+      <a href="https://t.me/edenalphaplays" target="_blank" rel="noopener" class="project-card reveal additional-project" hidden style="border-style:dashed;display:flex;align-items:center;justify-content:center;min-height:200px;">
         <div style="text-align:center">
           <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;margin-bottom:6px;" data-en="More Calls Coming" data-zh="更多喊单即将上线">More Calls Coming</div>
           <div style="font-size:12px;color:var(--muted);margin-bottom:16px;" data-en="Follow @edenalphaplays on Telegram" data-zh="在 Telegram 关注 @edenalphaplays">Follow @edenalphaplays on Telegram</div>
@@ -1225,6 +1713,33 @@
         </div>
       </a>
 
+    </div>
+    <button type="button" class="projects-toggle btn-primary" id="projectsToggle" aria-controls="projectsGrid" aria-expanded="false">
+      <span id="projectsToggleLabel" data-en="See more projects" data-zh="查看更多项目">See more projects</span>
+      <span id="projectsToggleIcon" aria-hidden="true">↓</span>
+    </button>
+  </section>
+
+  <!-- PARTNERSHIP -->
+  <section id="partnership">
+    <div class="section-label" data-en="Partnership" data-zh="合作伙伴">Partnership</div>
+    <h2 class="section-title" data-en="Officially Partnering with Rally" data-zh="正式与 Rally 达成合作">Officially Partnering with Rally</h2>
+    <div class="partnership-card reveal">
+      <div class="partnership-content">
+        <div class="partnership-badge" data-en="Official Partnership" data-zh="官方合作">Official Partnership</div>
+        <div class="partnership-name">Rally</div>
+        <p class="partnership-desc"
+           data-en="Rally is building a new home for launches, traders, and the attention that drives markets. We’re excited to partner with this launchpad as it builds a programmable market layer for any asset."
+           data-zh="Rally 正在为项目发行者、交易者以及推动市场发展的关注度打造一个全新的家园。我们很高兴与 Rally 合作，共同支持这个为任何资产构建可编程市场层的发行平台。">
+          Rally is building a new home for launches, traders, and the attention that drives markets. We’re excited to partner with this launchpad as it builds a programmable market layer for any asset.
+        </p>
+        <div class="partnership-actions">
+          <a href="https://x.com/rallypadfun" target="_blank" rel="noopener noreferrer" class="btn-primary"
+             data-en="Explore Rally" data-zh="了解 Rally">Explore Rally</a>
+          <a href="https://x.com/coconutdaddyjun/status/2095505688852414502" target="_blank" rel="noopener noreferrer" class="btn-ghost"
+             data-en="Read the announcement" data-zh="查看合作公告">Read the announcement</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1414,7 +1929,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Ed<span>en</span></div>
-    <div class="footer-copy" data-en="© 2025 · All rights reserved" data-zh="© 2025 · 版权所有">© 2025 · All rights reserved</div>
+    <div class="footer-copy" data-en="© 2026 · All rights reserved" data-zh="© 2026 · 版权所有">© 2026 · All rights reserved</div>
   </footer>
 
   <script>
@@ -1440,6 +1955,27 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+
+    const projectsToggle = document.getElementById('projectsToggle');
+    const projectsToggleLabel = document.getElementById('projectsToggleLabel');
+    const projectsToggleIcon = document.getElementById('projectsToggleIcon');
+    projectsToggle.addEventListener('click', () => {
+      const expanded = projectsToggle.getAttribute('aria-expanded') !== 'true';
+      document.querySelectorAll('.additional-project').forEach(card => {
+        card.hidden = !expanded;
+      });
+      projectsToggle.setAttribute('aria-expanded', String(expanded));
+      updateProjectsToggleLabel();
+    });
+
+    function updateProjectsToggleLabel() {
+      const isZh = document.documentElement.lang === 'zh';
+      const expanded = projectsToggle.getAttribute('aria-expanded') === 'true';
+      projectsToggleLabel.textContent = expanded
+        ? (isZh ? '收起项目' : 'Show fewer projects')
+        : (isZh ? '查看更多项目' : 'See more projects');
+      projectsToggleIcon.textContent = expanded ? '↑' : '↓';
+    }
 
     document.querySelectorAll('.project-card').forEach(card => {
       if (card.tagName === 'A') return;
@@ -1528,6 +2064,7 @@
       document.querySelectorAll('[data-en]').forEach(el => {
         el.innerHTML = isEn ? el.getAttribute('data-zh') : el.getAttribute('data-en');
       });
+      updateProjectsToggleLabel();
     }
   </script>
 </body>
